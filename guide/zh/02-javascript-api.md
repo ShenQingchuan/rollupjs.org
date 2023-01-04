@@ -2,26 +2,26 @@
 title: JavaScript API
 ---
 
-Rollup provides a JavaScript API which is usable from Node.js. You will rarely need to use this, and should probably be using the command line API unless you are extending Rollup itself or using it for something esoteric, such as generating bundles programmatically.
+Rollup 提供了一个通过 Node.js 使用的 JavaScript API。你应该很少需要使用这个，大多数情况都是使用命令行 API，除非您要扩展 Rollup 本身或将其用于某些更深奥的东西，例如自行编程生成产物。
 
 ### rollup.rollup
 
-The `rollup.rollup` function receives an input options object as parameter and returns a Promise that resolves to a `bundle` object with various properties and methods as shown below. During this step, Rollup will build the module graph and perform tree-shaking, but will not generate any output.
+`rollup.rollup` 函数接收输入选项对象作为参数，并返回一个 Promise，该 Promise 最终会返回具有如下所示各种属性和方法的产物对象 `bundle`。在此步骤期间，Rollup 将构建模块图并执行除屑优化（Tree-shaking），但不会生成任何输出。
 
-On a `bundle` object, you can call `bundle.generate` multiple times with different output options objects to generate different bundles in-memory. If you directly want to write them to disk, use `bundle.write` instead.
+在产物对象上，您可以使用不同的输出选项对象调用 `bundle.generate` 多次，以在内存中生成不同的产物。如果您直接想将它们写入磁盘，请使用 `bundle.write`。
 
-Once you're finished with the `bundle` object, you should call `bundle.close()`, which will let plugins clean up their external processes or services via the [`closeBundle`](guide/en/#closebundle) hook.
+一旦完成产物 `bundle` 对象的打包，应调用 `bundle.close()`，这将使插件能够通过 [`closeBundle`](#closebundle) 钩子清理其他外部过程或服务。
 
-If an error occurs at either stage, it will return a Promise rejected with an Error, which you can identify via their `code` property. Besides `code` and `message`, many errors have additional properties you can use for custom reporting, see [`utils/error.ts`](https://github.com/rollup/rollup/blob/master/src/utils/error.ts) for a complete list of errors and warnings together with their codes and properties.
+如果在任一阶段发生错误，它将返回一个带有 Error 的中断 Promise，您可以通过它们的代号 `code` 属性识别它们。除了 `code` 和 `message` 之外，许多错误还有其他属性，您可以用于自定义错误报告，请参见 [`utils/error.ts`](https://github.com/rollup/rollup/blob/master/src/utils/error.ts)，这是一个包含所有错误和警告以及它们的代号和属性的完整列表。
 
 ```javascript
 import { rollup } from 'rollup';
 
-// see below for details on these options
+// 下面详细介绍了这些选项的详细信息
 const inputOptions = {...};
 
-// you can create multiple outputs from the same input to generate e.g.
-// different formats like CommonJS and ESM
+// 您可以从相同的输入创建多个输出，
+// 以生成例如 CommonJS 和 ESM 等不同格式的文件。
 const outputOptionsList = [{...}, {...}];
 
 build();
