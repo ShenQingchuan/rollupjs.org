@@ -1,12 +1,12 @@
 ---
-title: Command Line Interface
+title: 命令行接口
 ---
 
-Rollup should typically be used from the command line. You can provide an optional Rollup configuration file to simplify command line usage and enable advanced Rollup functionality.
+Rollup 通常应该通过命令行形式使用。您也可以提供一个 Rollup 配置文件，以简化命令行使用，还能启用高级 Rollup 功能。
 
-### Configuration Files
+### 配置文件
 
-Rollup configuration files are optional, but they are powerful and convenient and thus **recommended**. A config file is an ES module that exports a default object with the desired options:
+尽管配置文件是可选的，但使用配置文件能更方便地利用 Rollup 的丰富功能，因此我们 **推荐** 你这样用。配置文件同样是一个 ES 模块，它应该导出一个默认对象，其中包含所需的选项：
 
 ```javascript
 export default {
@@ -18,37 +18,37 @@ export default {
 };
 ```
 
-Typically, it is called `rollup.config.js` or `rollup.config.mjs` and sits in the root directory of your project. Unless the [`--configPlugin`](guide/en/#--configplugin-plugin) or [`--bundleConfigAsCjs`](guide/en/#--bundleconfigascjs) options are used, Rollup will directly use Node to import the file. Note that there are some [caveats when using native Node ES modules](guide/en/#caveats-when-using-native-node-es-modules) as Rollup will observe [Node ESM semantics](https://nodejs.org/docs/latest-v14.x/api/packages.html#packages_determining_module_system).
+通常，它的文件名应该是 `rollup.config.js` 或者 `rollup.config.mjs` 并位于你项目的根目录。除非你使用了 [`--configPlugin`](guide/en/#--configplugin-plugin) 或者 [`--bundleConfigAsCjs`](guide/en/#--bundleconfigascjs) 选项，Rollup 都会直接使用 Node 来引入该文件。有一些 [使用原生 ES 模块时的注意事项](#使用原生_ES_模块的注意事项)，因为 Rollup 会遵循 [Node ESM 的语义](https://nodejs.org/docs/latest-v14.x/api/packages.html#packages_determining_module_system)。
 
-If you want to write your configuration as a CommonJS module using `require` and `module.exports`, you should change the file extension to `.cjs`.
+如果你想使用 `require` 和 `module.exports` 将你的配置写成一个 CommonJS 模块，你应该将文件扩展名改为 `.cjs`。
 
-You can also use other languages for your configuration files like TypeScript. To do that, install a corresponding Rollup plugin like `@rollup/plugin-typescript` and use the [`--configPlugin`](guide/en/#--configplugin-plugin) option:
+你也可以使用其他语言来作为你的配置文件，比如 TypeScript。若你要这么做，需要安装一个相应的 Rollup 插件，比如 `@rollup/plugin-typescript`，并使用 [`--configPlugin`](guide/en/#--configplugin-plugin) 选项：
 
 ```
 rollup --config rollup.config.ts --configPlugin typescript
 ```
 
-Using the `--configPlugin` option will always force your config file to be transpiled to CommonJS first. Also have a look at [Config Intellisense](guide/en/#config-intellisense) for more ways to use TypeScript typings in your config files.
+使用 `--configPlugin` 选项将总是强制将您的配置文件首先转译为 CommonJS。此外，还可以查看 [配置智能提示](#配置智能提示)，以了解更多在配置文件中使用 TypeScript 类型的方法。
 
-Config files support the options listed below. Consult the [big list of options](guide/en/#big-list-of-options) for details on each option:
+配置文件支持下面列出的这些选项。有关每个选项的详细信息，请参阅 [选项大列表](#选项大列表)：
 
 ```javascript
 // rollup.config.js
 
-// can be an array (for multiple inputs)
+// 可以是一个数组（用于多个输入）
 export default {
-  // core input options
+  // 输入配置的核心选项
   external,
-  input, // conditionally required
+  input, // 必需，但包含多种情景
   plugins,
 
-  // advanced input options
+  // 输入配置的进阶选项
   cache,
   onwarn,
   preserveEntrySignatures,
   strictDeprecations,
 
-  // danger zone
+  // 需要谨慎设置的选项
   acorn,
   acornInjectPlugins,
   context,
@@ -57,21 +57,21 @@ export default {
   shimMissingExports,
   treeshake,
 
-  // experimental
+  // 实验性
   experimentalCacheExpiry,
   perf,
 
-  // required (can be an array, for multiple outputs)
+  // 必需（可以是数组，用于多个输出）
   output: {
-    // core output options
+    // 输出配置的核心选项
     dir,
     file,
-    format, // required
+    format, // 必需
     globals,
     name,
     plugins,
 
-    // advanced output options
+    // 输出配置的进阶选项
     assetFileNames,
     banner,
     chunkFileNames,
@@ -96,7 +96,7 @@ export default {
     sourcemapPathTransform,
     validate,
 
-    // danger zone
+    // 需要谨慎设置的选项
     amd,
     esModule,
     exports,
@@ -122,10 +122,10 @@ export default {
 };
 ```
 
-You can export an **array** from your config file to build bundles from several unrelated inputs at once, even in watch mode. To build different bundles with the same input, you supply an array of output options for each input:
+你可以从你的配置文件中导出一个 **数组**，以一次性构建来自几个输入来源不相关的产物，甚至在 watch 模式下也可以。若要用相同的输入构建不同的产物，你需要为每个输入提供一个输出选项数组：
 
 ```javascript
-// rollup.config.js (building more than one bundle)
+// rollup.config.js（打包多个不同的产物）
 
 export default [
   {
@@ -151,7 +151,7 @@ export default [
 ];
 ```
 
-If you want to create your config asynchronously, Rollup can also handle a `Promise` which resolves to an object or an array.
+如果你想要异步创建你的配置，Rollup 也可以处理一个 `Promise`，它最终会获得一个对象或者一个数组。
 
 ```javascript
 // rollup.config.js
@@ -159,21 +159,21 @@ import fetch from 'node-fetch';
 export default fetch('/some-remote-service-or-file-which-returns-actual-config');
 ```
 
-Similarly, you can do this as well:
+同样，你也可以这样做：
 
 ```javascript
-// rollup.config.js (Promise resolving an array)
+// rollup.config.js（最终获得一个数组的 Promise）
 export default Promise.all([fetch('get-config-1'), fetch('get-config-2')]);
 ```
 
-To use Rollup with a configuration file, pass the `--config` or `-c` flags:
+（在命令行形式中）使用配置文件来使用 Rollup，传递 `--config` 或 `-c` 标志：
 
 ```
-# pass a custom config file location to Rollup
+# 将自定义配置文件的所在位置传递给 Rollup
 rollup --config my.config.js
 
-# if you do not pass a file name, Rollup will try to load
-# configuration files in the following order:
+# 如果您没有传递文件名，
+# Rollup 将按照以下顺序尝试加载配置文件：
 # rollup.config.mjs -> rollup.config.cjs -> rollup.config.js
 rollup --config
 ```

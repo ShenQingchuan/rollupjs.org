@@ -6,7 +6,7 @@ This is the source code for the website. Note that the actual guide is now part 
 
 1. `npm install`
 2. `npm run update-guide`
-3. `npm generate-graphs`
+3. `npm run generate-graphs`
 4. `npm run dev`
 5. Open up http://localhost:3000
 
