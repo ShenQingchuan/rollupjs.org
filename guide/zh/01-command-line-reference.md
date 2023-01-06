@@ -561,21 +561,21 @@ rollup -c --watch --watch.onEnd="node ./afterBuildScript.js"
 
 ### 从标准输入读入文件
 
-When using the command line interface, Rollup can also read content from stdin:
+使用命令行界面时，Rollup 也能从标准输入读取内容：
 
 ```
 echo "export const foo = 42;" | rollup --format cjs --file out.js
 ```
 
-When this file contains imports, Rollup will try to resolve them relative to the current working directory. When using a config file, Rollup will only use `stdin` as an entry point if the file name of the entry point is `-`. To read a non-entry-point file from stdin, just call it `-`, which is the file name that is used internally to reference `stdin`. I.e.
+当文件包含导入时，Rollup 将尝试相对于当前工作路径来解析它们。当使用配置文件时，如果入口的文件名是 `-`，Rollup 将仅用 `stdin` 作为入口。要从标准输入读取一个非入口的文件，只需要给它取名为 -，它是内部引用标准输入的文件名。即：
 
 ```js
 import foo from '-';
 ```
 
-in any file will prompt Rollup to try to read the imported file from `stdin` and assign the default export to `foo`. You can pass the [`--no-stdin`](guide/zh/#--no-stdin) CLI flag to Rollup to treat `-` as a regular file name instead.
+这会使得在任何文件中 Rollup 都将尝试从 stdin 读取导入文件，并且将其默认导出赋值给 foo。你可以通过 [`--no-stdin`](guide/zh/#--no-stdin) 命令行选项来使得 Rollup 像对待常规文件名一样对待 `-`。
 
-As some plugins rely on file extensions to process files, you can specify a file extension for stdin via `--stdin=ext` where `ext` is the desired extension. In that case, the virtual file name will be `-.ext`:
+由于某些插件依赖文件扩展名来处理文件，因此可以通过 `--stdin=ext` 指定 `stdin` 的文件扩展名，其中 `ext` 是所需的扩展名。在这种情况下，虚拟文件名将是 `-.ext`：
 
 ```
 echo '{"foo": 42, "bar": "ok"}' | rollup --stdin=json -p json
