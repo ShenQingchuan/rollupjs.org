@@ -413,14 +413,14 @@ export default {
 --waitForBundleInput        Wait for bundle input files
 --watch.buildDelay <number> Throttle watch rebuilds
 --no-watch.clearScreen      Do not clear the screen when rebuilding
---watch.exclude <files>     Exclude files from being watched
---watch.include <files>     Limit watching to specified files
---watch.onBundleEnd <cmd>   Shell command to run on `"BUNDLE_END"` event
---watch.onBundleStart <cmd> Shell command to run on `"BUNDLE_START"` event
---watch.onEnd <cmd>         Shell command to run on `"END"` event
---watch.onError <cmd>       Shell command to run on `"ERROR"` event
---watch.onStart <cmd>       Shell command to run on `"START"` event
---watch.skipWrite           Do not write files to disk when watching
+--watch.exclude <files>      监听时排除的文件
+--watch.include <files>      指定监听的文件范围
+--watch.onBundleEnd <cmd>   `"BUNDLE_END"` 事件时运行的 Shell 命令
+--watch.onBundleStart <cmd> `"BUNDLE_START"` 事件时运行的 Shell 命令
+--watch.onEnd <cmd>         `"END"` 事件时运行的 Shell 命令
+--watch.onError <cmd>       `"ERROR"` 事件时运行的 Shell 命令
+--watch.onStart <cmd>       `"START"` 事件时运行的 Shell 命令
+--watch.skipWrite           监听时不写入文件到磁盘
 ```
 
 The flags listed below are only available via the command line interface. All other flags correspond to and override their config file equivalents, see the [big list of options](guide/zh/#big-list-of-options) for details.
