@@ -459,13 +459,13 @@ Use the specified plugin. There are several ways to specify plugins here:
   rollup -i input.js -f es -p '{transform: (c, i) => `/* ${JSON.stringify(i)} */\n${c}`}'
   ```
 
-If you want to load more than one plugin, you can repeat the option or supply a comma-separated list of names:
+如果你想加载多个插件，你可以多次使用该选项或者提供一个逗号分隔的插件名称列表：
 
 ```
 rollup -i input.js -f es -p node-resolve -p commonjs,json
 ```
 
-By default, plugin functions will be called with no argument to create the plugin. You can however pass a custom argument as well:
+默认情况下，调用插件函数创建插件是不带任何参数的。但是你也可以传递自定义参数：
 
 ```
 rollup -i input.js -f es -p 'terser={output: {beautify: true, indent_level: 2}}'
@@ -473,7 +473,7 @@ rollup -i input.js -f es -p 'terser={output: {beautify: true, indent_level: 2}}'
 
 #### `--configPlugin <plugin>`
 
-Allows specifying Rollup plugins to transpile or otherwise control the parsing of your configuration file. The main benefit is that it allows you to use non-JavaScript configuration files. For instance the following will allow you to write your configuration in TypeScript, provided you have `@rollup/plugin-typescript` installed:
+这个选项使你可以指定 Rollup 插件来转译或控制你的配置文件的解析。主要的好处是它允许你使用非 JavaScript 配置文件。例如，下面的命令允许你使用 TypeScript 编写配置文件，前提是你已经安装了 `@rollup/plugin-typescript`：
 
 ```
 rollup --config rollup.config.ts --configPlugin @rollup/plugin-typescript
@@ -531,13 +531,13 @@ will set `process.env.INCLUDE_DEPS === 'true'` and `process.env.BUILD === 'produ
 }
 ```
 
-If you call this script via:
+如果你通过如下的方式使用该脚本：
 
 ```
 npm run build -- --environment BUILD:development
 ```
 
-then the config file will receive `process.env.INCLUDE_DEPS === 'true'` and `process.env.BUILD === 'development'`.
+那么配置文件将会接收到 `process.env.INCLUDE_DEPS === 'true'` 和 `process.env.BUILD === 'development'`。
 
 #### `--waitForBundleInput`
 
@@ -559,7 +559,7 @@ When in watch mode, run a shell command `<cmd>` for a watch event code. See also
 rollup -c --watch --watch.onEnd="node ./afterBuildScript.js"
 ```
 
-### Reading a file from stdin
+### 从标准输入读入文件
 
 When using the command line interface, Rollup can also read content from stdin:
 
@@ -581,4 +581,4 @@ As some plugins rely on file extensions to process files, you can specify a file
 echo '{"foo": 42, "bar": "ok"}' | rollup --stdin=json -p json
 ```
 
-The JavaScript API will always treat `-` and `-.ext` as regular file names.
+JavaScript API 将始终将 - 和 -.ext 视为普通文件名。
