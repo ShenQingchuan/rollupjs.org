@@ -346,43 +346,43 @@ export default {
 -m, --sourcemap             生成源映射（使用 `-m inline` 便是内嵌映射）（inline sourcemap）
 -n, --name <name>           UMD 导出的名称
 -o, --file <output>         单个输出文件（如果不存在，则输出到 stdout
--p, --plugin <plugin>      使用指定的插件（可使用多个该选项）
--v, --version              显示 Rollup 版本号
--w, --watch                监听需打包的文件并在更改时重新构建
---amd.autoId               根据块名自动生成 AMD ID
+-p, --plugin <plugin>       使用指定的插件（可使用多个该选项）
+-v, --version               显示 Rollup 版本号
+-w, --watch                 监听需打包的文件并在更改时重新构建
+--amd.autoId                根据块名自动生成 AMD ID（默认是匿名的）
 --amd.basePath <prefix>     在自动生成的 AMD ID 之前添加的路径
 --amd.define <name>         代替 `define` 的函数
 --amd.forceJsExtensionForImports 在 AMD 导入中强制使用 .js 扩展名
---assetFileNames <pattern>  Name pattern for emitted assets
---banner <text>             Code to insert at top of bundle (outside wrapper)
---chunkFileNames <pattern>  Name pattern for emitted secondary chunks
---compact                   Minify wrapper code
---context <variable>        Specify top-level `this` value
---no-dynamicImportInCjs     Write external dynamic CommonJS imports as require
---entryFileNames <pattern>  Name pattern for emitted entry chunks
---environment <values>      Settings passed to config file (see example)
---no-esModule               Do not add __esModule property
---exports <mode>            Specify export mode (auto, default, named, none)
---extend                    Extend global variable defined by --name
---no-externalImportAssertions Omit import assertions in "es" output
---no-externalLiveBindings   Do not generate code to support live bindings
---failAfterWarnings         Exit with an error if the build produced warnings
---footer <text>             Code to insert at end of bundle (outside wrapper)
---no-freeze                 Do not freeze namespace objects
---generatedCode <preset>    Which code features to use (es5/es2015)
---generatedCode.arrowFunctions Use arrow functions in generated code
---generatedCode.constBindings Use "const" in generated code
---generatedCode.objectShorthand Use shorthand properties in generated code
---no-generatedCode.reservedNamesAsProps Always quote reserved names as props
---generatedCode.symbols     Use symbols in generated code
---no-hoistTransitiveImports Do not hoist transitive imports into entry chunks
---no-indent                 Don't indent result
---inlineDynamicImports      Create single bundle when using dynamic imports
---no-interop                Do not include interop block
---intro <text>              Code to insert at top of bundle (inside wrapper)
---no-makeAbsoluteExternalsRelative Prevent normalization of external imports
---maxParallelFileOps <value> How many files to read in parallel
---minifyInternalExports     Force or disable minification of internal exports
+--assetFileNames <pattern>  打包出的的资源文件的名字格式
+--banner <text>             在产物顶部插入的代码（外部包装器外）
+--chunkFileNames <pattern>  打包出的次级产物切块的名称模式
+--compact                   是否压缩包装器代码
+--context <variable>        指定顶级 this 值
+--no-dynamicImportInCjs     将外部动态 CommonJS 导入写为 require
+--entryFileNames <pattern>  产物中作为入口的切块的命名模式
+--environment <values>      传递到配置文件的设置（参见示例）
+--no-esModule               不添加 __esModule 属性
+--exports <mode>            指定导出模式（auto、default、named、none）
+--extend                    通过 `--name` 定义，拓展全局变量
+--no-externalImportAssertions 在 "es" 输出产物中忽略导入断言
+--no-externalLiveBindings   不生成实时绑定（Live bindings）的代码
+--failAfterWarnings         只要构建生成了警告，就退出并显示错误，
+--footer <text>             在产物结尾插入代码（在包装器代码之外）
+--no-freeze                 不要冻结命名空间对象
+--generatedCode <preset>    使用的代码功能（es5/es2015）
+--generatedCode.arrowFunctions 在生成代码中使用箭头函数
+--generatedCode.constBindings 在生成代码中使用 "const"
+--generatedCode.objectShorthand 在生成代码中使用属性缩写
+--no-generatedCode.reservedNamesAsProps 始终在保留字作为属性名时加引号
+--generatedCode.symbols     在生成代码中 symbol
+--no-hoistTransitiveImports 不提升传递性的导入到产物的入口块
+--no-indent                 结果中不进行缩进
+--inlineDynamicImports      使用动态导入时创建单独的产物
+--no-interop                不要包含互操作块
+--intro <text>              在产物顶部插入代码（在包装器代码内）
+--no-makeAbsoluteExternalsRelative 防止规范化过程（normalization）作用于外部导入上
+--maxParallelFileOps <value> 并行读入文件的最大值
+--minifyInternalExports     强制开启或禁用内部导出的最小化压缩
 --noConflict                Generate a noConflict method for UMD globals
 --outro <text>              Code to insert at end of bundle (inside wrapper)
 --perf                      Display performance timings
